@@ -36,17 +36,17 @@ public class RegisterEventUseCase
     {
         if (requestEvent.MaximumAttendees <= 0)
         {
-            throw new PassInExeception("Maximum attendees should be grather than 0 (zero).");
+            throw new ErrorOnValidationException("Maximum attendees should be grather than 0 (zero).");
         }
 
         if (string.IsNullOrWhiteSpace(requestEvent.Title))
         {
-            throw new PassInExeception("Title not should be empty/null.");
+            throw new ErrorOnValidationException("Title not should be empty/null.");
         }
 
         if (string.IsNullOrWhiteSpace(requestEvent.Details))
         {
-            throw new PassInExeception("Details not should be empty/null.");
+            throw new ErrorOnValidationException("Details not should be empty/null.");
         }
     }
 }

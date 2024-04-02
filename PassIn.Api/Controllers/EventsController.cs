@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Mvc;
 using PassIn.Application.UseCases.Events;
 using PassIn.Communication.Requests;
 using PassIn.Communication.Responses;
-using PassIn.Execeptions;
 
 namespace PassIn.Api.Controllers;
 
@@ -15,21 +14,10 @@ public class EventsController : Controller
     [ProducesResponseType<ResponseErrorJson>(StatusCodes.Status404NotFound)]
     public IActionResult Get([FromQuery] Guid eventId)
     {
-        try
-        {
-            var eventUseCase = new GetEventByIdUseCase();
-            var response = eventUseCase.Execute(eventId);
+        var eventUseCase = new GetEventByIdUseCase();
+        var response = eventUseCase.Execute(eventId);
 
-            return Ok(response);
-        }
-        catch (PassInExeception ex)
-        {
-            return NotFound(new ResponseErrorJson(ex.Message));
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        return Ok(response);
     }
 
     [HttpPost]
@@ -37,20 +25,11 @@ public class EventsController : Controller
     [ProducesResponseType<ResponseErrorJson>(StatusCodes.Status400BadRequest)]
     public IActionResult Post([FromBody] RequestEventJson requestEvent)
     {
-        try
-        {
-            var eventUseCase = new RegisterEventUseCase();
-            var response = eventUseCase.Execute(requestEvent);
 
-            return CreatedAtAction(nameof(Get), new { Id = response.Id }, response);
-        }
-        catch (PassInExeception ex)
-        {
-            return NotFound(new ResponseErrorJson(ex.Message));
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
-        }
+        var eventUseCase = new RegisterEventUseCase();
+        var response = eventUseCase.Execute(requestEvent);
+
+        return CreatedAtAction(nameof(Get), new { Id = response.Id }, response);
+
     }
 }
