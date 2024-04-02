@@ -1,6 +1,6 @@
 namespace PassIn.Execeptions;
 
-public class PassInExeception : Exception
+public class PassInExeception : SystemException
 {
     public PassInExeception(string message)
         : base(message)

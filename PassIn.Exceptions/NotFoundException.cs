@@ -1,6 +1,6 @@
 namespace PassIn.Execeptions;
 
-public class NotFoundException : Exception
+public class NotFoundException : SystemException
 {
     public NotFoundException(string message)
         : base(message)
