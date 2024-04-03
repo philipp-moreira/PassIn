@@ -14,6 +14,7 @@ public class RegisterEventUseCase
 
         var entity = new Event()
         {
+            Id = Guid.NewGuid(),
             Title = requestEvent.Title,
             Details = requestEvent.Details,
             MaximumAttendees = requestEvent.MaximumAttendees,

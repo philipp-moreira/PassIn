@@ -5,14 +5,15 @@ using PassIn.Communication.Responses;
 
 namespace PassIn.Api.Controllers;
 
-[Controller]
+[ApiController]
 [Route("api/[controller]")]
-public class EventsController : Controller
+public class EventsController : ControllerBase
 {
-    [HttpGet("eventId")]
+    [HttpGet]
+    [Route("{eventId}")]
     [ProducesResponseType<ResponseEventJson>(StatusCodes.Status200OK)]
     [ProducesResponseType<ResponseErrorJson>(StatusCodes.Status404NotFound)]
-    public IActionResult Get([FromQuery] Guid eventId)
+    public IActionResult Get([FromRoute] Guid eventId)
     {
         var eventUseCase = new GetEventByIdUseCase();
         var response = eventUseCase.Execute(eventId);
@@ -21,7 +22,7 @@ public class EventsController : Controller
     }
 
     [HttpPost]
-    [ProducesResponseType<ResponseEventJson>(StatusCodes.Status201Created)]
+    [ProducesResponseType<ResponseRegisteredEventJson>(StatusCodes.Status201Created)]
     [ProducesResponseType<ResponseErrorJson>(StatusCodes.Status400BadRequest)]
     public IActionResult Post([FromBody] RequestEventJson requestEvent)
     {
@@ -29,7 +30,6 @@ public class EventsController : Controller
         var eventUseCase = new RegisterEventUseCase();
         var response = eventUseCase.Execute(requestEvent);
 
-        return CreatedAtAction(nameof(Get), new { Id = response.Id }, response);
-
+        return CreatedAtAction(nameof(Get), new { EventId = response.Id }, response);
     }
 }

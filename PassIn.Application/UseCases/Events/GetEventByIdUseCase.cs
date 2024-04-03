@@ -12,10 +12,10 @@ public class GetEventByIdUseCase
         {
             using (var context = new PassInContext())
             {
-                var entity = context.Events.FirstOrDefault(ev => ev.Id.Equals(id));
+                var entity = context.Events.FirstOrDefault(ev => ev.Id == id);
                 if (entity is null)
                 {
-                    throw new NotFoundException($"Don't erxists event to id '{id}'.");
+                    throw new NotFoundException($"Don't exists event to id '{id}'.");
                 }
 
                 return new ResponseEventJson()

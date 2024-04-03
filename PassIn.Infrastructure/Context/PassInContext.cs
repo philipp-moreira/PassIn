@@ -5,9 +5,16 @@ namespace PassIn.Infrastructure.Context;
 
 public class PassInContext : DbContext
 {
+    #region Fields/Constants
     readonly string dbPath = "Data Source=/home/philipp/src/csharp/PassIn/databases/PassInDb.db";
-    public DbSet<Event> Events { get; set; }
+    #endregion
 
+    #region Properties
+    public DbSet<Event> Events { get; set; }
+    public DbSet<Attendee> Attendees { get; set; }
+    #endregion
+
+    #region Methods
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseSqlite(dbPath);
@@ -16,6 +23,7 @@ public class PassInContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         ModelCreatingToEvent(modelBuilder);
+        ModelCreatingToAttendee(modelBuilder);
     }
 
     protected internal virtual void ModelCreatingToEvent(ModelBuilder modelBuilder)
@@ -23,4 +31,14 @@ public class PassInContext : DbContext
         modelBuilder.Entity<Event>()
                     .Property("MaximumAttendees").HasColumnName("Maximum_Attendees");
     }
+
+    protected internal virtual void ModelCreatingToAttendee(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Attendee>(build =>
+        {
+            build.Property("EventId").HasColumnName("Event_Id");
+            build.Property("CreatedAt").HasColumnName("Created_At");
+        });
+    }
+    #endregion
 }
