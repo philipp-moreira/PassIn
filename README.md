@@ -53,3 +53,6 @@ Aplicação com o objetivo de viabilizar a gestão de eventos presenciais.
         - ![Static Badge](https://img.shields.io/badge/C%23--blue?style=flat-square&logo=csharp&logoColor=green)
         
         - ![Static Badge](https://img.shields.io/badge/openapi-v3.0-green?style=flat-square&logo=swagger&logoColor=%2385EA2D)
+- #### Swagger / openApi
+
+![image](https://github.com/philipp-moreira/PassIn/assets/17642499/96fee175-79c6-4cd5-a4bf-affe52c2898a)
