@@ -12,6 +12,8 @@ public class PassInContext : DbContext
     #region Properties
     public DbSet<Event> Events { get; set; }
     public DbSet<Attendee> Attendees { get; set; }
+    public DbSet<CheckIn> CheckIns { get; set; }
+
     #endregion
 
     #region Methods
@@ -24,6 +26,7 @@ public class PassInContext : DbContext
     {
         ModelCreatingToEvent(modelBuilder);
         ModelCreatingToAttendee(modelBuilder);
+        ModelCreatingToCheckIn(modelBuilder);
     }
 
     protected internal virtual void ModelCreatingToEvent(ModelBuilder modelBuilder)
@@ -40,5 +43,15 @@ public class PassInContext : DbContext
             build.Property("CreatedAt").HasColumnName("Created_At");
         });
     }
+
+    protected internal virtual void ModelCreatingToCheckIn(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<CheckIn>(build =>
+        {
+            build.Property("AttendeeId").HasColumnName("Attendee_Id");
+            build.Property("CreatedAt").HasColumnName("Created_At");
+        });
+    }
+
     #endregion
 }

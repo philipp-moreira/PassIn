@@ -7,4 +7,5 @@ public class Attendee
     public string Email { get; set; } = string.Empty;
     public Guid EventId { get; set; }
     public DateTime CreatedAt { get; set; }
+    public CheckIn? CheckIn { get; set; }
 }

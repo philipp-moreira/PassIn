@@ -9,4 +9,6 @@ public class Event
     public string Details { get; set; } = string.Empty;
     public string Slug { get; set; } = string.Empty;
     public int MaximumAttendees { get; set; }
+    [ForeignKey("Event_id")]
+    public List<Attendee> Attendees { get; set; } = [];
 }

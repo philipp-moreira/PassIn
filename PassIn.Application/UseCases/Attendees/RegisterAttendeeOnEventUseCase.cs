@@ -69,7 +69,7 @@ public class RegisterAttendeeOnEventUseCase
             throw new ConflictException("Attendee already registered to event.");
         }
 
-        var registersToEvent = _dbContext.Attendees.Count(ev => ev.Id == eventId );
+        var registersToEvent = _dbContext.Attendees.Count(ev => ev.EventId == eventId );
         if (registersToEvent == eventEntity.MaximumAttendees)
         {
             throw new ErrorOnValidationException("Maximum event capacity reached.");
